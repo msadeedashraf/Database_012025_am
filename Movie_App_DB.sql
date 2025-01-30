@@ -1,35 +1,10 @@
--- Drop constraints first
-ALTER TABLE Late_Fees DROP CONSTRAINT IF EXISTS FK__Late_Fees__membe__70DDC3D8;
-ALTER TABLE Late_Fees DROP CONSTRAINT IF EXISTS FK__Late_Fees__trans__71D1E811;
-ALTER TABLE Transactions DROP CONSTRAINT IF EXISTS FK__Transactions__memb__72C60C4A;
-ALTER TABLE Transactions DROP CONSTRAINT IF EXISTS FK__Transactions__movi__73B4E4F6;
-ALTER TABLE Movie_Providers DROP CONSTRAINT IF EXISTS FK__Movie_Providers__movi__74A3CBFB;
-ALTER TABLE Movie_Providers DROP CONSTRAINT IF EXISTS FK__Movie_Providers__prov__7593B1DE;
-ALTER TABLE Favorites DROP CONSTRAINT IF EXISTS FK__Favorites__user__768F439A;
-ALTER TABLE Favorites DROP CONSTRAINT IF EXISTS FK__Favorites__movi__777C4178;
-ALTER TABLE Watchlist DROP CONSTRAINT IF EXISTS FK__Watchlist__user__786B292E;
-ALTER TABLE Watchlist DROP CONSTRAINT IF EXISTS FK__Watchlist__movi__795B1C56;
-ALTER TABLE Reviews DROP CONSTRAINT IF EXISTS FK__Reviews__user__7A4A1C1D;
-ALTER TABLE Reviews DROP CONSTRAINT IF EXISTS FK__Reviews__movi__7B3A11F3;
-ALTER TABLE Movie_Actors DROP CONSTRAINT IF EXISTS FK__Movie_Actors__movi__7C2A1E33;
-ALTER TABLE Movie_Actors DROP CONSTRAINT IF EXISTS FK__Movie_Actors__acto__7D1A1F99;
-ALTER TABLE Movies DROP CONSTRAINT IF EXISTS FK__Movies__genre__7E0A221A;
-ALTER TABLE Members DROP CONSTRAINT IF EXISTS FK__Members__user__7EF027D5;
+CREATE DATABASE moviedb;
+GO
 
--- Drop tables if they exist
-DROP TABLE IF EXISTS Late_Fees;
-DROP TABLE IF EXISTS Transactions;
-DROP TABLE IF EXISTS Movie_Providers;
-DROP TABLE IF EXISTS Streaming_Providers;
-DROP TABLE IF EXISTS Favorites;
-DROP TABLE IF EXISTS Watchlist;
-DROP TABLE IF EXISTS Reviews;
-DROP TABLE IF EXISTS Movie_Actors;
-DROP TABLE IF EXISTS Actors;
-DROP TABLE IF EXISTS Movies;
-DROP TABLE IF EXISTS Genres;
-DROP TABLE IF EXISTS Members;
-DROP TABLE IF EXISTS Users;
+-- Use the Database
+USE moviedb;
+GO
+
 
 CREATE TABLE Users (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -38,6 +13,7 @@ CREATE TABLE Users (
     password_hash VARCHAR(255) NOT NULL,
     role VARCHAR(50) CHECK (role IN ('user', 'admin')) NOT NULL
 );
+GO
 
 CREATE TABLE Members (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -48,11 +24,13 @@ CREATE TABLE Members (
     status VARCHAR(20) CHECK (status IN ('Active', 'Suspended')) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
+GO
 
 CREATE TABLE Genres (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE
 );
+GO
 
 CREATE TABLE Movies (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -66,6 +44,7 @@ CREATE TABLE Movies (
     genre_id INT NOT NULL,
     FOREIGN KEY (genre_id) REFERENCES Genres(id) ON DELETE CASCADE
 );
+GO
 
 CREATE TABLE Actors (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -74,6 +53,7 @@ CREATE TABLE Actors (
     biography TEXT,
     profile_url VARCHAR(255)
 );
+GO
 
 CREATE TABLE Movie_Actors (
     movie_id INT NOT NULL,
@@ -82,6 +62,7 @@ CREATE TABLE Movie_Actors (
     FOREIGN KEY (movie_id) REFERENCES Movies(id) ON DELETE CASCADE,
     FOREIGN KEY (actor_id) REFERENCES Actors(id) ON DELETE CASCADE
 );
+GO
 
 CREATE TABLE Reviews (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -93,6 +74,7 @@ CREATE TABLE Reviews (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY (movie_id) REFERENCES Movies(id) ON DELETE CASCADE
 );
+GO
 
 CREATE TABLE Watchlist (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -102,6 +84,7 @@ CREATE TABLE Watchlist (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY (movie_id) REFERENCES Movies(id) ON DELETE CASCADE
 );
+GO
 
 CREATE TABLE Favorites (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -111,6 +94,7 @@ CREATE TABLE Favorites (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY (movie_id) REFERENCES Movies(id) ON DELETE CASCADE
 );
+GO
 
 CREATE TABLE Streaming_Providers (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -118,6 +102,7 @@ CREATE TABLE Streaming_Providers (
     logo_url VARCHAR(255),
     website_url VARCHAR(255)
 );
+GO
 
 CREATE TABLE Movie_Providers (
     movie_id INT NOT NULL,
@@ -127,6 +112,7 @@ CREATE TABLE Movie_Providers (
     FOREIGN KEY (movie_id) REFERENCES Movies(id) ON DELETE CASCADE,
     FOREIGN KEY (provider_id) REFERENCES Streaming_Providers(id) ON DELETE CASCADE
 );
+GO
 
 CREATE TABLE Transactions (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -138,6 +124,7 @@ CREATE TABLE Transactions (
     FOREIGN KEY (member_id) REFERENCES Members(id) ON DELETE CASCADE,
     FOREIGN KEY (movie_id) REFERENCES Movies(id) ON DELETE CASCADE
 );
+GO
 
 CREATE TABLE Late_Fees (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -149,6 +136,7 @@ CREATE TABLE Late_Fees (
     FOREIGN KEY (transaction_id) REFERENCES Transactions(id) ON DELETE CASCADE,
     FOREIGN KEY (member_id) REFERENCES Members(id) ON DELETE NO ACTION
 );
+GO
 
 
 -- Trigger to Prevent Borrowing if Movie is Already Borrowed
@@ -165,6 +153,7 @@ BEGIN
         RAISERROR ('This movie is already borrowed.', 16, 1);
     END
 END;
+GO
 
 -- Procedure to Mark Overdue Transactions
 CREATE PROCEDURE MarkOverdueTransactions
@@ -174,6 +163,7 @@ BEGIN
     SET status = 'Overdue'
     WHERE return_date IS NULL AND borrow_date < DATEADD(DAY, -14, GETDATE());
 END;
+GO
 
 -- Trigger to Calculate Late Fees
 CREATE TRIGGER trg_CalculateLateFee
@@ -194,6 +184,7 @@ BEGIN
         WHERE i.return_date > DATEADD(DAY, 14, i.borrow_date);
     END
 END;
+GO
 
 -- Procedure to Extend Borrowing Period
 CREATE PROCEDURE Extend_Borrowing
@@ -205,3 +196,5 @@ BEGIN
     SET return_date = DATEADD(DAY, @extra_days, return_date)
     WHERE id = @transaction_id AND status = 'Borrowed';
 END;
+GO
+
