@@ -1,3 +1,7 @@
+-- Begin transaction block
+BEGIN TRANSACTION;
+BEGIN TRY
+
 -- Insert sample data in correct order
 INSERT INTO Users (name, email, password_hash, role) VALUES 
 ('John Doe', 'john@example.com', 'hashed_password1', 'user'), 
@@ -50,3 +54,11 @@ INSERT INTO Actors (name, dob, biography, profile_url) VALUES
 
 INSERT INTO Movie_Actors (movie_id, actor_id) VALUES 
 (1, 1), (3, 2);
+ -- Commit transaction if successful
+    COMMIT;
+END TRY
+BEGIN CATCH
+    -- Rollback transaction in case of error
+    ROLLBACK;
+    PRINT 'Transaction failed. Rolling back changes.';
+END CATCH;
