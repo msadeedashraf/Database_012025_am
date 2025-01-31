@@ -8,7 +8,7 @@
 
 
 ### Normalization
-[DB Normalization](https://www.simplilearn.com/tutorials/dbms-tutorial/what-are-various-types-of-databases)
+[DB Normalization](https://www.guru99.com/database-normalization.html)
 [Step-by-Step Guide with Example](https://www.analyticsvidhya.com/blog/2022/08/database-normalization-a-step-by-step-guide-with-examples/)
 
 
