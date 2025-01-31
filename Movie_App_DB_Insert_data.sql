@@ -1,3 +1,4 @@
+-- Insert sample data in correct order
 INSERT INTO Users (name, email, password_hash, role) VALUES 
 ('John Doe', 'john@example.com', 'hashed_password1', 'user'), 
 ('Jane Smith', 'jane@example.com', 'hashed_password2', 'admin'),
@@ -27,11 +28,11 @@ INSERT INTO Transactions (member_id, movie_id, borrow_date, return_date, status)
 INSERT INTO Late_Fees (transaction_id, member_id, fee_amount, paid_status, due_date) VALUES 
 (1, 1, 5.00, 0, '2024-01-22');
 
-INSERT INTO Movie_Providers (movie_id, provider_id, availability_status) VALUES 
-(1, 1, 'Subscription'), (3, 2, 'Rent');
-
 INSERT INTO Streaming_Providers (name, logo_url, website_url) VALUES 
 ('Netflix', 'netflix.png', 'netflix.com'), ('Hulu', 'hulu.png', 'hulu.com');
+
+INSERT INTO Movie_Providers (movie_id, provider_id, availability_status) VALUES 
+(1, 1, 'Subscription'), (3, 2, 'Rent');
 
 INSERT INTO Favorites (user_id, movie_id) VALUES 
 (1, 1), (2, 3);
@@ -43,9 +44,9 @@ INSERT INTO Reviews (user_id, movie_id, rating, review_text) VALUES
 (1, 1, 9, 'Amazing movie!'),
 (3, 3, 8, 'Great visuals!');
 
-INSERT INTO Movie_Actors (movie_id, actor_id) VALUES 
-(1, 1), (3, 2);
-
 INSERT INTO Actors (name, dob, biography, profile_url) VALUES 
 ('Leonardo DiCaprio', '1974-11-11', 'Famous actor known for Titanic, Inception.', 'leo.jpg'),
 ('Matthew McConaughey', '1969-11-04', 'Academy Award winner, known for Interstellar.', 'matt.jpg');
+
+INSERT INTO Movie_Actors (movie_id, actor_id) VALUES 
+(1, 1), (3, 2);
