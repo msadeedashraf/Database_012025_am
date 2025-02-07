@@ -35,3 +35,8 @@
 
 [MongoDB](https://www.mongodb.com/)
 [Install MongoDB Community Edition on Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+[Download](https://www.mongodb.com/try/download/community)
+[Download Shell](https://www.mongodb.com/try/download/shell)
+
+
+
