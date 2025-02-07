@@ -31,3 +31,7 @@
 ### Restore to SQL Server
 [Link](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms#restore-to-sql-server)
 
+### No-SQL Database
+
+[MongoDB](https://www.mongodb.com/)
+[Install MongoDB Community Edition on Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
