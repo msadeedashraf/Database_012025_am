@@ -1,30 +1,12 @@
-### Inserting One Document 
-
-db.monkeys.insertOne(
-{
-Name: "Baboon",
-    Location: "Africa & Asia",
-    Details: "Baboons are African and Arabian Old World monkeys belonging to the genus Papio, part of the subfamily Cercopithecinae.",
-    Image: "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/baboon.jpg",
-    Population: 10000,
-    Latitude: -8.783195,
-    Longitude: 34.508523
-}
-)
-
-### Inserting Many Document 
-
-
-
-
-
-
 
 ### Useful Commands
 
 | Operation            | MongoDB Shell                  | Node.js (Mongoose)            |
 |----------------------|--------------------------------|------------------------------|
 | Connect to MongoDB  | `mongosh`                     | `mongoose.connect()`        |
+| Check the current database       | `db`                          | Not recommended in Mongoose |
+| List all databases      | `show dbs`            | Not recommended in Mongoose |
+| List collections in the current database       | `show collections`           | Not recommended in Mongoose |
 | Use Database        | `use mydatabase`              | Created automatically       |
 | Create Collection   | `db.createCollection("users")` | Defined via Schema          |
 | Insert Document     | `db.users.insertOne({...})`   | `User.save()`               |
@@ -33,13 +15,10 @@ Name: "Baboon",
 | Delete Data         | `db.users.deleteOne({...})`   | `User.deleteOne({...})`     |
 | Drop Collection     | `db.users.drop()`             | Not recommended in Mongoose |
 | Drop Database       | `db.dropDatabase()`           | Not recommended in Mongoose |
-| Check the current database       | `db`                          | Not recommended in Mongoose |
-| List all databases      | `show dbs`            | Not recommended in Mongoose |
-| List collections in the current database       | `show collections`           | Not recommended in Mongoose |
 
 
 
-### Inserting One Document 
+### Inserting Document 
 
 ```javascript
 
@@ -55,10 +34,6 @@ Name: "Baboon",
 }
 )
 
-
-
-
-````javascript
 db.monkeys.insertMany([
   {
     "Name": "Capuchin Monkey",
