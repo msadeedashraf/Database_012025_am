@@ -36,3 +36,19 @@ db.monkeys.insertMany(
   }]
 )
 
+
+### Useful Commands
+
+| Operation            | MongoDB Shell                  | Node.js (Mongoose)            |
+|----------------------|--------------------------------|------------------------------|
+| Connect to MongoDB  | `mongosh`                     | `mongoose.connect()`        |
+| Use Database        | `use mydatabase`              | Created automatically       |
+| Create Collection   | `db.createCollection("users")` | Defined via Schema          |
+| Insert Document     | `db.users.insertOne({...})`   | `User.save()`               |
+| Select Data         | `db.users.find()`             | `User.find()`               |
+| Update Data         | `db.users.updateOne({...})`   | `User.updateOne({...})`     |
+| Delete Data         | `db.users.deleteOne({...})`   | `User.deleteOne({...})`     |
+| Drop Collection     | `db.users.drop()`             | Not recommended in Mongoose |
+| Drop Database       | `db.dropDatabase()`           | Not recommended in Mongoose |
+
+
