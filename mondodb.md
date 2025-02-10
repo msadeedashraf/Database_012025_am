@@ -50,5 +50,8 @@ db.monkeys.insertMany(
 | Delete Data         | `db.users.deleteOne({...})`   | `User.deleteOne({...})`     |
 | Drop Collection     | `db.users.drop()`             | Not recommended in Mongoose |
 | Drop Database       | `db.dropDatabase()`           | Not recommended in Mongoose |
+| Check the current database       | `db`                          | Not recommended in Mongoose |
+| List all databases      | show dbs`            | Not recommended in Mongoose |
+| List collections in the current database       | `show collections`           | Not recommended in Mongoose |
 
 
