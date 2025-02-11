@@ -9,7 +9,8 @@
 | List collections in the current database       | `show collections`           | Not recommended in Mongoose |
 | Use Database        | `use mydatabase`              | Created automatically       |
 | Create Collection   | `db.createCollection("users")` | Defined via Schema          |
-| Insert Document     | `db.users.insertOne({...})`   | `User.save()`               |
+| Insert One Document     | `db.users.insertOne({...})`   | `User.save()`               |
+| Insert Many Document     | `db.users.insertMany([{},{},{}...])`   | `User.save()`               |
 | Select Data         | `db.users.find()`             | `User.find()`               |
 | Update Data         | `db.users.updateOne({...})`   | `User.updateOne({...})`     |
 | Delete Data         | `db.users.deleteOne({...})`   | `User.deleteOne({...})`     |
