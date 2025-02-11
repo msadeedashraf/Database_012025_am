@@ -17,6 +17,12 @@
 | Drop Database       | `db.dropDatabase()`           | Not recommended in Mongoose |
 
 
+### Recipes Data URL
+
+[Recipes Data](https://www.themealdb.com/api/json/v1/1/random.php)
+
+
+
 
 ### Inserting Document 
 
@@ -54,3 +60,4 @@ db.monkeys.insertMany([
     "Longitude": 37.297204
   }
 ])
+
