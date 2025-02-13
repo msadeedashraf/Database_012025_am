@@ -1,3 +1,7 @@
+### Useful Reference
+[MongoDB](https://www.w3schools.com/mongodb/)
+
+
 
 ### Useful Commands
 
@@ -16,6 +20,20 @@
 | Delete Data         | `db.users.deleteOne({...})`   | `User.deleteOne({...})`     |
 | Drop Collection     | `db.users.drop()`             | Not recommended in Mongoose |
 | Drop Database       | `db.dropDatabase()`           | Not recommended in Mongoose |
+
+### Check if MongoDB is Running
+
+For Windows (Command Prompt or PowerShell):
+
+>net start MongoDB
+
+### Restart MongoDB
+
+Windows (PowerShell):
+>net stop MongoDB
+>net start MongoDB
+
+
 
 
 ### Recipes Data URL
